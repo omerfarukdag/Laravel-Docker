@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+    server:
+        build:
+            context: ./laravel-docker
+        container_name: server
+        ports:
+            - 80:80
+        volumes:
+            - ./laravel-docker:/var/www/html
+        command: php -S server:80 -t ./public
+        restart: unless-stopped
+
+    database:
+        image: mysql:latest
+        container_name: database
+        ports:
+            - 3306:3306
+        volumes:
+            - ./laravel-docker/mysql:/var/lib/mysql
+        environment:
+            MYSQL_DATABASE: laravel_db
+            MYSQL_USER: laravel_user
+            MYSQL_PASSWORD: laravel_pw
+            MYSQL_ROOT_PASSWORD: root
+        restart: unless-stopped
