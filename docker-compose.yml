@@ -25,3 +25,11 @@ services:
             MYSQL_PASSWORD: laravel_pw
             MYSQL_ROOT_PASSWORD: root
         restart: unless-stopped
+
+    composer:
+        image: composer:latest
+        container_name: composer
+        volumes:
+            - ./laravel-docker:/var/www/html
+        working_dir: /var/www/html
+        command: composer install
