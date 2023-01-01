@@ -11,6 +11,8 @@ services:
             - ./laravel-docker:/var/www/html
         command: php -S server:80 -t ./public
         restart: unless-stopped
+        depends_on:
+            - database
 
     database:
         image: mysql:latest
